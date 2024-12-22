@@ -1,45 +1,76 @@
-# Patient Monitoring System  
+# Patient Monitoring and Alert System 
 
-A comprehensive **Patient Monitoring System** that enables real-time monitoring of vital signs and environmental conditions for both local and remote patients. The system leverages IoT technologies, integrating various sensors, microcontrollers, and protocols to ensure timely alerts and data-driven decision-making.  
+In the rapidly evolving field of healthcare, the integration of technology has become imperative to improve patient outcomes, enhance the efficiency of medical services, and reduce healthcare costs. The primary objective of this **Patient Monitoring System** is to ensure the timely and accurate collection of critical physiological data, such as heart rate, blood oxygen levels, and body temperature for both local and remote patients. This data is crucial for the early detection of potential health issues, allowing for prompt intervention and thereby improving patient prognosis. Traditional methods of monitoring, which often rely on periodic manual checks, are prone to delays and inaccuracies. In contrast, an IoT-based monitoring system can provide continuous, real-time data, significantly enhancing the quality of patient care.
+
+The system leverages IoT technologies, integrating various sensors, microcontrollers, and protocols to ensure timely alerts and data-driven decision-making.  
 
 ## Features  
-- **Vital Sign Monitoring**: Measures blood oxygen saturation (SpO2) and heart rate (BPM) using the **MAX30100 sensor**.  
-- **Local Environment Monitoring**: Tracks temperature, humidity, and gas levels using:  
-  - **DHT11** sensor for temperature and humidity.  
-  - **MQ-2** sensor for gas detection.  
-- **Remote Monitoring**: Employs a **Raspberry Pi** with additional sensors to monitor environmental conditions at a remote location.  
-- **Alerts**: Buzzer triggers when vital or environmental readings exceed safe thresholds.  
-- **Data Transmission**: Uses **NodeMCU** and the **MQTT protocol** for seamless communication between devices.  
+- **Vital Sign Monitoring**:  
+  - Measures **SpO2** (blood oxygen saturation level) and **BPM** (heart rate) using the **MAX30100 sensor**.  
+  - Alerts triggered if SpO2 or BPM values fall outside safe thresholds.  
+- **Environmental Monitoring**:  
+  - Tracks room **temperature**, **humidity**, and **smoke levels** using **DHT11** and **MQ-135 sensors**.  
+  - Alerts activated for abnormal temperature, humidity, or smoke levels.  
+- **Data Communication**:  
+  - Uses **I2C protocol** for local sensor communication.  
+  - Transmits data over the internet using **ESP8266 NodeMCU** and the **MQTT protocol**.  
+- **Display and Alert for Medical Staff**:  
+  - Displays SpO2 and BPM readings on a **16x2 LCD**.  
+  - Activates a buzzer if readings are outside safe thresholds. 
 
 ## System Architecture  
-The project consists of two main setups:  
-1. **Local Monitoring**  
-   - Components: Arduino, DHT11, MQ-2, MAX30100.  
-   - Communication: NodeMCU with MQTT.  
-   - Alerts: Buzzer for critical conditions.  
+The system consists of three interconnected components:
 
-2. **Remote Monitoring**  
-   - Components: Raspberry Pi, additional environmental sensors.  
-   - Communication: MQTT for data transmission.  
-   - Alerts: Buzzer for emergencies.  
+### 1. **Patient-Side NodeMCU**  
+- **Inputs**:  
+  - MAX30100 sensor for SpO2 and BPM.  
+  - DHT11 sensor for temperature and humidity.  
+  - MQ-135 sensor for smoke detection.  
+- **Outputs**:  
+  - Activates a buzzer for abnormal SpO2, BPM, temperature, humidity, or smoke levels.  
+- **Communication**:  
+  - Transmits SpO2 and BPM readings to the doctor-side NodeMCU via MQTT. 
+
+### 2. **Doctor-Side NodeMCU**  
+- **Inputs**:  
+  - Receives SpO2 and BPM readings via MQTT.  
+- **Outputs**:  
+  - Displays readings on a **16x2 LCD**.  
+  - Activates a buzzer if SpO2 or BPM values are outside safe thresholds.  
+
+### 3. **Environmental Monitoring with Arduino**  
+- **Inputs**:  
+  - DHT11 sensor for temperature and humidity.  
+  - MQ-135 sensor for smoke detection.  
+- **Outputs**:  
+  - Activates a buzzer for abnormal environmental readings.
 
 ## Technologies Used  
-- **Microcontrollers**: Arduino, NodeMCU.  
-- **Single-Board Computer**: Raspberry Pi.  
-- **Sensors**: MAX30100, DHT11, MQ-2, additional gas sensors.  
-- **Protocols**: MQTT for lightweight and reliable communication.  
-- **Programming Languages**: C/C++, Python.  
+- **Microcontrollers**: ESP8266 NodeMCU, Arduino.  
+- **Sensors**:  
+  - **MAX30100**: Measures SpO2 and BPM.  
+  - **DHT11**: Measures temperature and humidity.  
+  - **MQ-135**: Detects smoke levels.  
+- **Protocols**:  
+  - **I2C**: Local sensor communication.  
+  - **MQTT**: Data transmission between NodeMCU modules.  
+- **Display**: 16x2 LCD.  
+- **Programming Languages**: C/C++, Arduino IDE.  
 
 ## How It Works  
-1. The **MAX30100 sensor** monitors SpO2 and BPM and sends the data to the NodeMCU.  
-2. Environmental sensors (DHT11, MQ-2) gather data and transmit it to the monitoring system via MQTT.  
-3. For remote monitoring, the Raspberry Pi subscribes to MQTT topics and processes incoming data.  
-4. If abnormal readings are detected, a buzzer alerts the caretaker or healthcare provider.  
+1. **Vital Monitoring**:  
+   - The **MAX30100 sensor** connected to the patient-side NodeMCU measures SpO2 and BPM.  
+   - If readings are abnormal, the NodeMCU activates a buzzer and sends the data to the doctor-side NodeMCU over MQTT.  
+2. **Doctor-Side Monitoring**:  
+   - The doctor-side NodeMCU receives the readings, displays them on a **16x2 LCD**, and activates a buzzer for abnormal readings.  
+3. **Environmental Monitoring**:  
+   - The **DHT11** and **MQ-135 sensors** connected to the Arduino measure room temperature, humidity, and smoke levels.  
+   - If environmental conditions are unsuitable, the Arduino triggers another buzzer to alert the patient.   
 
 ## Use Cases  
-- **Hospitals**: Monitor multiple patients and environments.  
-- **Home Care**: Track health parameters of individuals in remote areas.  
-- **Elderly Care**: Real-time monitoring for proactive healthcare.  
+- **Hospitals**: Monitor patient vitals and room conditions remotely.  
+- **Home Care**: Ensure patient safety in local and remote environments.  
+- **Emergency Alerts**: Enable timely intervention by medical staff.  
 
 ## Installation and Setup  
 1. Clone this repository:  

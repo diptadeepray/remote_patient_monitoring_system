@@ -1,8 +1,8 @@
 # Patient Monitoring and Alert System 
 
-In the rapidly evolving field of healthcare, the integration of technology has become imperative to improve patient outcomes, enhance the efficiency of medical services, and reduce healthcare costs. The primary objective of this **Patient Monitoring System** is to ensure the timely and accurate collection of critical physiological data, such as heart rate, blood oxygen levels, and body temperature for both local and remote patients. This data is crucial for the early detection of potential health issues, allowing for prompt intervention and thereby improving patient prognosis. Traditional methods of monitoring, which often rely on periodic manual checks, are prone to delays and inaccuracies. In contrast, an IoT-based monitoring system can provide continuous, real-time data, significantly enhancing the quality of patient care.
+In the rapidly evolving field of healthcare, the integration of technology has become imperative to improve patient outcomes, enhance the efficiency of medical services, and reduce healthcare costs. The primary objective of this **Patient Monitoring System** is to ensure the timely and accurate collection of critical physiological data, such as heart rate, blood oxygen levels, and body temperature for both local and remote patients. 
 
-The system leverages IoT technologies, integrating various sensors, microcontrollers, and protocols to ensure timely alerts and data-driven decision-making.  
+This data is crucial for the early detection of potential health issues, allowing for prompt intervention and thereby improving patient prognosis. Traditional methods of monitoring, which often rely on periodic manual checks, are prone to delays and inaccuracies. In contrast, an IoT-based monitoring system can provide continuous, real-time data, significantly enhancing the quality of patient care.
 
 ## Features  
 - **Vital Sign Monitoring**:  
@@ -59,18 +59,20 @@ The system consists of three interconnected components:
 
 ## How It Works  
 1. **Vital Monitoring**:  
-   - The **MAX30100 sensor** connected to the patient-side NodeMCU measures SpO2 and BPM.  
-   - If readings are abnormal, the NodeMCU activates a buzzer and sends the data to the doctor-side NodeMCU over MQTT.  
+   - The **MAX30100 sensor** is connected to the patient-side NodeMCU that measures SpO2 and BPM.
+   - The NodeMCU continuously sends the data to the doctor-side NodeMCU over MQTT.  
+   - If readings are abnormal, the NodeMCU activates a buzzer.
 2. **Doctor-Side Monitoring**:  
-   - The doctor-side NodeMCU receives the readings, displays them on a **16x2 LCD**, and activates a buzzer for abnormal readings.  
+   - The doctor-side NodeMCU receives the readings, displays them on a **16x2 LCD**.
+   - The NodeMCU also activates a buzzer for abnormal readings.  
 3. **Environmental Monitoring**:  
    - The **DHT11** and **MQ-135 sensors** connected to the Arduino measure room temperature, humidity, and smoke levels.  
-   - If environmental conditions are unsuitable, the Arduino triggers another buzzer to alert the patient.   
+   - If environmental conditions are unsuitable, the Arduino triggers another buzzer to alert people around the patient.   
 
 ## Use Cases  
-- **Hospitals**: Monitor patient vitals and room conditions remotely.  
+- **Hospitals**: Monitor patients' vitals and room conditions remotely and locally.  
 - **Home Care**: Ensure patient safety in local and remote environments.  
-- **Emergency Alerts**: Enable timely intervention by medical staff.  
+- **Emergency Alerts**: Enable timely intervention by medical staff in case of emergency.  
 
 ## Installation and Setup  
 1. Clone this repository:  

@@ -1,6 +1,6 @@
 # Patient Monitoring and Alert System 
 
-## Introduction
+## Motivation of the Project
 In the rapidly evolving field of healthcare, the integration of technology has become imperative to improve patient outcomes, enhance the efficiency of medical services, and reduce healthcare costs. The primary objective of this **Patient Monitoring System** is to ensure the timely and accurate collection of critical physiological data, such as heart rate, blood oxygen levels, and body temperature for both local and remote patients. 
 
 This data is crucial for the early detection of potential health issues, allowing for prompt intervention and thereby improving patient prognosis. Traditional methods of monitoring, which often rely on periodic manual checks, are prone to delays and inaccuracies. In contrast, an IoT-based monitoring system can provide continuous, real-time data, significantly enhancing the quality of patient care.

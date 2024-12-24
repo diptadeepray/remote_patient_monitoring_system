@@ -34,7 +34,7 @@ int bb=92;
 /************************* WiFi Access Point *********************************/
 
 #define WLAN_SSID       "Redmi Note 13 5G"
-#define WLAN_PASS       "diptadeepray"
+#define WLAN_PASS       "*********"
 
 /************************* Adafruit.io Setup *********************************/
 
